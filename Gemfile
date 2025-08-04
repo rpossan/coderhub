@@ -73,11 +73,12 @@ group :development, :test do
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
 
+  # Minitest for testing (Rails default)
+  gem "minitest-rails"
+  gem "minitest-reporters"
+
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-
-  # RSpec for testing
-  gem "rspec-rails"
   gem "factory_bot_rails"
   gem "faker"
 end
@@ -100,4 +101,11 @@ group :test do
 
   # Code coverage
   gem "simplecov", require: false
+
+  # Minitest enhancements
+  gem "minitest-spec-rails"
+  gem "mocha"
 end
+
+
+
