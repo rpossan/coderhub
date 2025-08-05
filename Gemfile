@@ -65,8 +65,7 @@ gem "httparty"
 gem "bootstrap", "~> 5.3"
 gem "sassc-rails"
 
-# URL shortening
-gem "shorturl"
+gem "whenever"
 
 group :development, :test do
   gem "awesome_print"
@@ -104,7 +103,7 @@ group :test do
   gem "selenium-webdriver"
 
   # Code coverage
-  gem "simplecov", require: false
+  gem "simplecov"
 
   # Minitest enhancements
   gem "minitest-spec-rails"
