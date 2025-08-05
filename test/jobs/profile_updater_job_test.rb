@@ -2,7 +2,7 @@ require "test_helper"
 
 class ProfileUpdaterJobTest < ActiveJob::TestCase
   test "updates profiles" do
-    profile = profiles(:matz)
+    profile = profiles(:one)
     assert_not profile.github_username.nil?
 
     ProfileUpdaterJob.perform_now([ profile.id ])

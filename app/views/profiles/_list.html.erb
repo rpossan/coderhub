@@ -15,8 +15,8 @@
         <div class="card profile-card h-100">
           <div class="card-body">
             <div class="d-flex align-items-center mb-3">
-              <% if profile.avatar_url.present? %>
-                <%= image_tag profile.avatar_url, class: "profile-avatar me-3", alt: profile.name %>
+              <% if profile.avatar.present? %>
+                <%= image_tag profile.avatar, class: "profile-avatar me-3", alt: profile.name %>
               <% else %>
                 <div class="profile-avatar me-3 bg-secondary d-flex align-items-center justify-content-center">
                   <i class="bi bi-person text-white"></i>
