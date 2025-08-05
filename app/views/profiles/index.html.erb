@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-12">
+    <h1 class="mb-4">
+      <i class="fab fa-github"></i> Indexador de Perfis do GitHub
+    </h1>
+  </div>
+</div>
+
+<div class="search-section">
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Buscar Perfis</h3>
+      <%= form_with url: search_profiles_path, method: :get, local: true, class: "d-flex" do |form| %>
+        <%= form.text_field :q, value: @search_term, placeholder: "Nome, usuário, organização ou localização...",
+                           class: "form-control me-2" %>
+        <%= form.submit "Buscar", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <h3>Inclusão rápida</h3>
+      <%= form_with model: @profile, local: true do |form| %>
+        <div class="row">
+          <div class="col-md-6">
+            <%= form.text_field :name, placeholder: "Nome", class: "form-control mb-2" %>
+          </div>
+          <div class="col-md-6">
+            <%= form.text_field :github_url, placeholder: "link ou username", class: "form-control mb-2" %>
+          </div>
+        </div>
+        <%= form.submit "Cadastrar", class: "btn btn-success" %>
+      <% end %>
+
+      <% if @profile.errors.any? %>
+        <div class="alert alert-danger mt-2">
+          <ul class="mb-0">
+            <% @profile.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render "list", profiles: @profiles %>
+

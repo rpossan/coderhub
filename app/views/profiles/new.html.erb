@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="mb-0">
+          <i class="fab fa-github"></i> Cadastrar Novo Perfil do GitHub
+        </h3>
+      </div>
+      <div class="card-body">
+        <%= form_with model: @profile, local: true do |form| %>
+          <% if @profile.errors.any? %>
+            <div class="alert alert-danger">
+              <h4><%= pluralize(@profile.errors.count, "erro") %> impediram o cadastro:</h4>
+              <ul class="mb-0">
+                <% @profile.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="mb-3">
+            <%= form.label :name, "Nome Completo", class: "form-label" %>
+            <%= form.text_field :name, class: "form-control", placeholder: "Ex: Yukihiro Matsumoto" %>
+            <div class="form-text">Nome do cadastro (pode ser diferente do nome no GitHub)</div>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :github_url, "URL do Perfil no GitHub", class: "form-label" %>
+            <%= form.text_field :github_url, class: "form-control", placeholder: "https://github.com/username or username" %>
+            <div class="form-text">URL do perfil no GitHub (ex: https://github.com/matz) ou apenas username</div>
+          </div>
+
+          <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i>
+            <strong>Informação:</strong> Após o cadastro, os dados do perfil do GitHub serão automaticamente extraídos, incluindo:
+            <ul class="mb-0 mt-2">
+              <li>Número de followers e following</li>
+              <li>Número de stars e contribuições</li>
+              <li>Foto de perfil</li>
+              <li>Organização e localização (se disponíveis)</li>
+            </ul>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <%= link_to "Cancelar", root_path, class: "btn btn-secondary" %>
+            <%= form.submit "Cadastrar Perfil", class: "btn btn-success" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

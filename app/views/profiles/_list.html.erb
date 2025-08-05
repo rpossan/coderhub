@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-12">
+    <% if @search_term.present? %>
+      <h4>Resultados para "<%= @search_term %>" (<%= @profiles.count %> encontrados)</h4>
+    <% else %>
+      <h4>Todos os perfis (<%= @profiles.count %>)</h4>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <% if @profiles.any? %>
+    <% @profiles.each do |profile| %>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card profile-card h-100">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <% if profile.avatar_url.present? %>
+                <%= image_tag profile.avatar_url, class: "profile-avatar me-3", alt: profile.name %>
+              <% else %>
+                <div class="profile-avatar me-3 bg-secondary d-flex align-items-center justify-content-center">
+                  <i class="bi bi-person text-white"></i>
+                </div>
+              <% end %>
+              <div>
+                <h5 class="card-title mb-1"><%= profile.name %></h5>
+                <p class="text-muted mb-0">@<%= profile.github_username %></p>
+              </div>
+            </div>
+
+            <% if profile.organization.present? %>
+              <p class="mb-2"><i class="bi bi-building"></i> <%= profile.organization %></p>
+            <% end %>
+
+            <% if profile.location.present? %>
+              <p class="mb-2"><i class="bi bi-geo-alt"></i> <%= profile.location %></p>
+            <% end %>
+
+            <div class="github-stats mb-3">
+              <% if profile.followers.present? %>
+                <div class="stat-item">
+                  <div class="stat-value"><%= profile.followers %></div>
+                  <div class="stat-label"><i class="bi bi-eye-fill me-1"></i> Followers</div>
+                </div>
+              <% end %>
+
+              <% if profile.following.present? %>
+                <div class="stat-item">
+                  <div class="stat-value"><%= profile.following %></div>
+                  <div class="stat-label"><i class="bi bi-people-fill me-1"></i> Following</div>
+                </div>
+              <% end %>
+
+              <% if profile.stars.present? %>
+                <div class="stat-item">
+                  <div class="stat-value"><%= profile.stars %></div>
+                    <div class="stat-label">
+                    <i class="bi bi-star-fill me-1"></i> Stars
+                    </div>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <%= link_to "Ver Perfil", profile, class: "btn btn-primary btn-sm" %>
+              <% if profile.short_url.present? %>
+                <%= short_url_link profile %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="col-12">
+      <div class="alert alert-info text-center">
+        <h4>Nenhum perfil encontrado</h4>
+        <p>Seja o primeiro a cadastrar um perfil do GitHub!</p>
+      </div>
+    </div>
+  <% end %>
+</div>

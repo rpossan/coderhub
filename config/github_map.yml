@@ -1,0 +1,10 @@
+profile:
+  name: h1.vcard-names span.p-name
+  nickname: h1.vcard-names span.p-nickname
+  followers: a[href*="followers"] span.text-bold
+  following: a[href*="following"] span.text-bold
+  stars: a[href*="?tab=stars"] span.Counter
+  contributions: .js-yearly-contributions h2.f4
+  avatar: img.avatar-user
+  organization: span.p-org
+  location: li[itemprop="homeLocation"]
