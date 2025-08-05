@@ -2,13 +2,14 @@
 <link rel="icon" type="image/png" href="<%= asset_path 'favicon.png' %>">
 <html>
   <head>
-    <title>Coderhub - Indexador de perfis do Github</title>
+    <title>Coderhub - Github profile indexer</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css", rel: "stylesheet", crossorigin: "anonymous" %>
   </head>
 
   <body>
@@ -18,7 +19,7 @@
         <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
           <%= image_tag "coder.png", alt: "Coderhub Logo", height: 90 %>
           <span style="font-size: 1rem; font-style: italic;">
-            Indexador de perfis do Github
+            Github profile indexer
           </span>
         <% end %>
 

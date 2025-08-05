@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="mb-0">
+          <i class="bi bi-pencil"></i> Editar Perfil
+        </h3>
+      </div>
+      <div class="card-body">
+        <%= form_with model: @profile, local: true do |form| %>
+          <% if @profile.errors.any? %>
+            <div class="alert alert-danger">
+              <h4><%= pluralize(@profile.errors.count, "erro") %> impediram a atualização:</h4>
+              <ul class="mb-0">
+                <% @profile.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="mb-3">
+            <%= form.label :name, "Nome Completo", class: "form-label" %>
+            <%= form.text_field :name, class: "form-control", placeholder: "Ex: Yukihiro Matsumoto" %>
+            <div class="form-text">Nome completo da pessoa</div>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :github_url, "URL do Perfil no GitHub", class: "form-label" %>
+            <%= form.url_field :github_url, class: "form-control", placeholder: "https://github.com/username" %>
+            <div class="form-text">URL completa do perfil no GitHub</div>
+          </div>
+
+          <div class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle"></i>
+            <strong>Atenção:</strong> Apenas o nome e a URL podem ser editados manualmente.
+            Os outros dados (followers, stars, etc.) são atualizados automaticamente através do webscrapping.
+            Para atualizar esses dados, use a função "Re-escanear" na página do perfil.
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <%= link_to "Cancelar", @profile, class: "btn btn-secondary" %>
+            <%= form.submit "Atualizar Perfil", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

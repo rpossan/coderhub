@@ -1,0 +1,120 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center mb-4">
+          <% if @profile.avatar_url.present? %>
+            <%= image_tag @profile.avatar_url, class: "rounded-circle me-4", style: "width: 120px; height: 120px; object-fit: cover;", alt: @profile.name %>
+          <% else %>
+            <div class="rounded-circle me-4 bg-secondary d-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
+              <i class="bi fa-user text-white" style="font-size: 3rem;"></i>
+            </div>
+          <% end %>
+
+          <div>
+            <h1 class="mb-2"><%= @profile.name %></h1>
+            <p class="text-muted h5 mb-2">@<%= @profile.github_username %></p>
+            <% if @profile.organization.present? %>
+              <p class="mb-1"><i class="bi fa-building"></i> <%= @profile.organization %></p>
+            <% end %>
+            <% if @profile.location.present? %>
+              <p class="mb-1"><i class="bi fa-map-marker-alt"></i> <%= @profile.location %></p>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Estatísticas do GitHub -->
+        <div class="row mb-4">
+          <div class="col-md-3 col-6 mb-3">
+            <div class="text-center p-3 bg-light rounded">
+              <h3 class="text-primary mb-1"><%= @profile.followers || 0 %></h3>
+              <p class="text-muted mb-0">Followers</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-3">
+            <div class="text-center p-3 bg-light rounded">
+              <h3 class="text-success mb-1"><%= @profile.following || 0 %></h3>
+              <p class="text-muted mb-0">Following</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-3">
+            <div class="text-center p-3 bg-light rounded">
+              <h3 class="text-warning mb-1"><%= @profile.stars || 0 %></h3>
+              <p class="text-muted mb-0">Stars</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-3">
+            <div class="text-center p-3 bg-light rounded">
+              <h3 class="text-info mb-1"><%= @profile.contributions || 0 %></h3>
+              <p class="text-muted mb-0">Contribuições</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div class="mb-4">
+          <h5>Links</h5>
+          <div class="d-flex flex-wrap gap-2">
+            <%= link_to @profile.github_url, class: "btn btn-github", target: "_blank" do %>
+              <i class="fab fa-github"></i> Ver no GitHub
+            <% end %>
+
+            <% if @profile.short_url.present? %>
+              <%= short_url_link @profile %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <!-- Ações -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5 class="mb-0">Ações</h5>
+      </div>
+      <div class="card-body">
+
+        <%=
+          button_to '<i class="bi bi-arrow-clockwise"></i> Re-escanear Dados'.html_safe, rescan_profile_path(@profile),
+          method: :patch,
+          data: { confirm: "Tem certeza que deseja re-escanear este perfil?" },
+          class: "btn btn-primary w-100 mb-2"
+        %>
+
+        <%= link_to edit_profile_path(@profile), class: "btn btn-warning w-100 mb-2" do %>
+          <i class="bi bi-pencil"></i> Editar Perfil
+        <% end %>
+
+        <%= button_to '<i class="bi bi-trash"></i> Remover perfil'.html_safe, @profile,
+              method: :delete,
+              data: { confirm: "Tem certeza que deseja remover este perfil?" },
+              class: "btn btn-danger w-100" %>
+      </div>
+    </div>
+
+    <!-- Informações Técnicas -->
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Informações</h5>
+      </div>
+      <div class="card-body">
+        <p><strong>Cadastrado em:</strong><br>
+        <%= @profile.created_at.strftime("%d/%m/%Y às %H:%M") %></p>
+
+        <p><strong>Última atualização:</strong><br>
+        <%= @profile.updated_at.strftime("%d/%m/%Y às %H:%M") %></p>
+
+        <% if @profile.short_url.present? %>
+          <p><strong>URL Encurtada:</strong><br>
+          <code><%= UrlShortenerService.expand_url(@profile.short_url) %></code></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-4">
+  <%= link_to "← Voltar para a lista", root_path, class: "btn btn-secondary" %>
+</div>
