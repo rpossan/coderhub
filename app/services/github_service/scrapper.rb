@@ -32,13 +32,13 @@ module GithubService
       doc = Nokogiri::HTML html
       map = Map.new
       @profile = ParsedProfile.new
-      @profile.name = doc.css(map.name).first.text.strip
-      @profile.nickname = doc.css(map.nickname).first.text.strip
-      @profile.followers = parse_count(doc.css(map.followers).first.text.strip)
-      @profile.following = parse_count(doc.css(map.following).first.text.strip)
-      @profile.stars = parse_count(doc.css(map.stars).first.text.strip)
+      @profile.name = doc.css(map.name).first&.text&.strip
+      @profile.nickname = doc.css(map.nickname).first&.text&.strip
+      @profile.followers = parse_count(doc.css(map.followers).first&.text&.strip)
+      @profile.following = parse_count(doc.css(map.following).first&.text&.strip)
+      @profile.stars = parse_count(doc.css(map.stars).first&.text&.strip)
       @profile.contributions = Contributions.new(@username).contributions
-      @profile.avatar = doc.css(map.avatar).first["src"]
+      @profile.avatar = doc.css(map.avatar).first&.[]("src")
       @profile.organization = doc.css(map.organization).first&.text&.strip
       @profile.location = doc.css(map.location).first&.text&.strip
     end
