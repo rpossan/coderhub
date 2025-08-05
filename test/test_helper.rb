@@ -4,6 +4,7 @@ require "rails/test_help"
 require "minitest/rails"
 require "minitest/reporters"
 require "mocha/minitest"
+require "ostruct"
 
 # SimpleCov for code coverage
 require "simplecov"

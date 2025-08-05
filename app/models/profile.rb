@@ -7,6 +7,7 @@ class Profile < ApplicationRecord
   validates :github_username, presence: true, uniqueness: true
 
   before_validation :extract_username
+  before_validation :generate_github_url
   before_create :generate_short_url
 
   scope :search, ->(term) {
@@ -19,7 +20,7 @@ class Profile < ApplicationRecord
   def update_github_data!
     scraped_profile = GithubService::Scrapper.new(github_username).profile
     self.name ||= scraped_profile.name
-    self.avatar_url = scraped_profile.avatar
+    self.avatar = scraped_profile.avatar
     self.github_username = scraped_profile.nickname
     self.github_url = GithubService::Scrapper::GITHUB_BASE_URL + scraped_profile.nickname
     self.followers = scraped_profile.followers
@@ -33,7 +34,15 @@ class Profile < ApplicationRecord
 
   private
 
+  def generate_github_url
+    return if github_url.present?
+
+    self.github_url = GithubService::Scrapper::GITHUB_BASE_URL + github_username.to_s
+  end
+
   def extract_username
+    return if github_url.blank?
+
     self.github_username = github_url.gsub(%r{\Ahttps?:\/\/github\.com\/}, "").gsub(/\/$/, "")
   end
 

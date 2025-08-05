@@ -108,4 +108,6 @@ group :test do
   # Minitest enhancements
   gem "minitest-spec-rails"
   gem "mocha"
+
+  gem "rails-controller-testing"
 end

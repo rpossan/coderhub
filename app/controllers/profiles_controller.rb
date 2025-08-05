@@ -8,17 +8,16 @@ class ProfilesController < ApplicationController
 
   def show_by_short
     url = UrlShortenerService.expand_url params[:short_code]
-    url ? redirect_to(url) : redirect_to(profiles_path, alert: "Perfil não encontrado!")
+    if url
+      redirect_to(url, allow_other_host: true)
+    else
+      redirect_to(profiles_path, allow_other_host: true, alert: "Perfil não encontrado!")
+    end
   end
 
   # GET /profiles/search
   def search
-    if params[:q].present?
-      @profiles = Profile.search(params[:q]).order(:name)
-    else
-      @profiles = Profile.all.order(:name)
-    end
-
+    @profiles = Profile.search(params[:q]).order(:name)
     render :index
   end
 
