@@ -515,107 +515,6 @@
           null
         ]
       },
-      "/home/ronaldo/projects/coderhub/app/services/github_service/map.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          null,
-          null,
-          1,
-          null,
-          1,
-          2,
-          null,
-          0,
-          null,
-          null,
-          null
-        ]
-      },
-      "/home/ronaldo/projects/coderhub/app/services/github_service/parsed_profile.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/home/ronaldo/projects/coderhub/app/services/github_service/contributions.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          2,
-          2,
-          2,
-          2,
-          null,
-          null,
-          1,
-          null,
-          1,
-          2,
-          2,
-          2,
-          null,
-          2,
-          2,
-          2,
-          null,
-          2,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/home/ronaldo/projects/coderhub/app/services/github_service/errors.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          2,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
       "/home/ronaldo/projects/coderhub/app/controllers/profiles_controller.rb": {
         "lines": [
           1,
@@ -718,6 +617,107 @@
           null
         ]
       },
+      "/home/ronaldo/projects/coderhub/app/services/github_service/map.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          null,
+          1,
+          2,
+          null,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/ronaldo/projects/coderhub/app/services/github_service/parsed_profile.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/home/ronaldo/projects/coderhub/app/services/github_service/contributions.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          null,
+          1,
+          2,
+          2,
+          2,
+          null,
+          2,
+          2,
+          2,
+          null,
+          2,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/ronaldo/projects/coderhub/app/services/github_service/errors.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
       "/home/ronaldo/projects/coderhub/app/helpers/application_helper.rb": {
         "lines": [
           0,
@@ -731,7 +731,7 @@
         "branches": {}
       }
     },
-    "timestamp": 1754426883
+    "timestamp": 1754427991
   },
   "Unit Tests": {
     "coverage": {

@@ -21,10 +21,12 @@ Uma aplicação Ruby on Rails completa para indexar e gerenciar perfis do GitHub
 - **SQLite3**: Banco de dados para desenvolvimento
 - **HTTParty**: Cliente HTTP para webscrapping
 - **Nokogiri**: Parser HTML para extração de dados
+- **ActiveJob**: Processamento em background assíncrono
+- **Whenever**: Agendamento de tarefas assíncronas
 
 ### Frontend
 - **Bootstrap 5**: Framework CSS para interface responsiva
-- **Font Awesome**: Ícones
+- **Bootstrap icons**: Ícones
 - **HTML5/CSS3**: Estrutura e estilização
 - **JavaScript**: Interatividade
 ### Testes e Qualidade
@@ -42,7 +44,7 @@ Uma aplicação Ruby on Rails completa para indexar e gerenciar perfis do GitHub
 
 ## 📋 Pré-requisitos
 
-- Ruby 3.2+
+- Ruby 3.4+
 - Rails 8.0+
 - SQLite3
 - Git
@@ -66,12 +68,22 @@ rails db:create
 rails db:migrate
 ```
 
-### 4. Execute os testes (opcional)
+### 4. Crie o arquivo `.env` na raiz do projeto, baseado no .env.example.
+```bash
+APP_URL=http://localhost:3000
+```
+
+### 5. Execute os testes (opcional)
 ```bash
 rails test
 ```
 
-### 5. Inicie o servidor
+### 6. Execute a rake para atualizar os perfis já cadastrados (opcional)
+```bash
+rake profiles:update_github_info
+```
+
+### 7. Inicie o servidor
 ```bash
 rails server
 ```
@@ -118,11 +130,17 @@ A aplicação estará disponível em `http://localhost:3000`
   - `search`: Busca personalizada
   - `rescan`: Re-escaneamento de dados
 
+### Parser Mapping
+- Mapeamento dos seletores CSS para extração de dados do GitHub
+- Facilita manutenção e atualização dos seletores
+- Quando houver mudanças no layout do GitHub, basta atualizar o arquivo config/github_map.yml
+
 ### Services
-- **GithubService**: Responsável pelo webscrapping
-  - Extração de dados do HTML do GitHub
-  - Tratamento de erros e timeouts
-  - Parsing de números com notação k/m
+- **GithubService**: Modulo responsável pelo webscrapping
+  - Scrapper: Extração de dados do HTML do GitHub
+  - Errors: Tratamento de erros e timeouts
+  - Contributions: Cálculo de contribuições anuais que é buscado via webscrapping da API pública
+  - ParsedProfile: Estrutura de dados retornada
 
 - **UrlShortenerService**: Sistema de encurtamento de URLs
   - Geração de códigos únicos
@@ -140,17 +158,14 @@ A aplicação possui uma suite completa de testes:
 
 ```bash
 # Executar todos os testes
-bundle exec rspec
-
-# Executar com relatório de cobertura
-bundle exec rspec --format documentation
+rails test
 
 # Ver relatório de cobertura
 open coverage/index.html
 ```
 
 ### Cobertura Atual
-- **87.5%** de cobertura de código
+- **83.96%** de cobertura de código
 - Testes de models, controllers, services e integração
 - Mocks e stubs para dependências externas
 
@@ -175,11 +190,6 @@ O sistema utiliza seletores CSS específicos para extrair dados do GitHub:
 - URLs no formato: `https://coderhub.app/s/{code}`
 - Geração determinística para mesma URL
 
-### Validações
-- Nome: obrigatório, 2-100 caracteres
-- URL do GitHub: formato válido e única
-- Campos numéricos: não negativos
-- Extração automática do username
 
 ## 🚧 Limitações e Pontos de Melhoria
 
@@ -203,17 +213,10 @@ O sistema utiliza seletores CSS específicos para extrair dados do GitHub:
 9. **CI/CD**: Pipeline automatizado de testes e deploy
 10. **Internationalization**: Suporte a múltiplos idiomas
 
-### Possíveis Extensões
-- **Organizações**: Suporte a perfis de organizações
-- **Repositórios**: Indexar repositórios dos usuários
-- **Analytics**: Dashboard com estatísticas
-- **Export**: Exportar dados em CSV/JSON
-- **API**: Criar API REST para integração
-- **Webhooks**: Notificações automáticas de mudanças
 
 ## 📊 Métricas de Qualidade
 
-- **Cobertura de Testes**: 87.5%
+- **Cobertura de Testes**: 83.96%
 - **Complexidade**: Baixa (métodos pequenos e focados)
 - **Manutenibilidade**: Alta (código bem estruturado)
 - **Performance**: Adequada para escala pequena/média
@@ -233,95 +236,10 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 
 ## 👨‍💻 Autor
 
-Desenvolvido como desafio técnico demonstrando habilidades fullstack em Ruby on Rails.
+@rpossan
 
 ---
 
 **Nota**: Esta aplicação foi desenvolvida para fins educacionais e de demonstração. Para uso em produção, implemente as melhorias de segurança e performance sugeridas.
 
-
-
-## 🚀 Atualização para Rails 8
-
-Esta aplicação foi **atualizada do Rails 7.1.5 para Rails 8.0.2**, mantendo todas as funcionalidades existentes:
-
-### Principais Mudanças
-- **Ruby**: Atualizado de 3.0.2 para 3.2.0 (requisito do Rails 8)
-- **Rails**: Atualizado para 8.0.2 com todas as novas funcionalidades
-- **Gems**: Todas as dependências atualizadas para versões compatíveis
-- **Configurações**: Arquivos de configuração atualizados automaticamente
-- **Testes**: Suite de testes mantida com 100% de compatibilidade
-
-### Novas Funcionalidades do Rails 8
-- **Performance**: Melhorias significativas de performance
-- **Security**: Novos recursos de segurança integrados
-- **Developer Experience**: Ferramentas aprimoradas para desenvolvimento
-- **Active Storage**: Melhorias no sistema de arquivos
-- **Action Cable**: Aprimoramentos em WebSockets
-
-### Compatibilidade
-- ✅ Todas as funcionalidades originais mantidas
-- ✅ Testes passando (62 exemplos, 0 falhas)
-- ✅ Interface funcionando perfeitamente
-- ✅ Webscrapping operacional
-- ✅ Encurtamento de URLs funcionando
-
-
-
-## 🔄 Conversão para Minitest
-
-Esta aplicação foi **convertida de RSpec para Minitest**, mantendo a mesma cobertura e funcionalidades:
-
-### Principais Mudanças
-- **Framework**: RSpec → Minitest (padrão do Rails)
-- **Sintaxe**: Convertida de `describe/it` para `test`
-- **Mocking**: FactoryBot → Mocha + Fixtures
-- **Estrutura**: `spec/` → `test/`
-- **Configuração**: SimpleCov integrado ao Minitest
-
-### Vantagens do Minitest
-- **Performance**: Mais rápido que RSpec
-- **Simplicidade**: Sintaxe mais simples e direta
-- **Padrão Rails**: Framework oficial do Rails
-- **Menor overhead**: Menos dependências
-- **Melhor integração**: Funciona nativamente com Rails
-
-### Estrutura de Testes
-```
-test/
-├── test_helper.rb          # Configuração principal
-├── fixtures/               # Dados de teste
-│   └── profiles.yml
-├── models/                 # Testes de models
-│   └── profile_test.rb
-├── controllers/            # Testes de controllers
-│   └── profiles_controller_test.rb
-└── services/              # Testes de services
-    ├── github_scraper_service_test.rb
-    └── url_shortener_service_test.rb
-```
-
-### Comandos de Teste
-```bash
-# Executar todos os testes
-rails test
-
-# Executar testes específicos
-rails test test/models/profile_test.rb
-rails test test/controllers/
-rails test test/services/
-
-# Executar com relatório detalhado
-rails test --verbose
-
-# Ver cobertura de testes
-open coverage/index.html
-```
-
-### Cobertura Mantida
-- ✅ **70+ testes** implementados
-- ✅ **Models**: Validações, callbacks, scopes
-- ✅ **Controllers**: CRUD, busca, re-escaneamento
-- ✅ **Services**: Webscrapping, encurtamento de URLs
-- ✅ **SimpleCov**: Relatórios de cobertura
 
