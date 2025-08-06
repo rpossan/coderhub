@@ -68,27 +68,27 @@ gem "sassc-rails"
 gem "whenever"
 
 group :development, :test do
-  gem "awesome_print"
+  # gem "awesome_print"
 
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  # # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
 
-  # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
-  gem "brakeman", require: false
+  # gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  # # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
+  # gem "brakeman", require: false
 
-  # Minitest for testing (Rails default)
-  gem "minitest-rails"
-  gem "minitest-reporters"
+  # # Minitest for testing (Rails default)
+  # gem "minitest-rails"
+  # gem "minitest-reporters"
 
-  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
-  gem "rubocop-rails-omakase", require: false
-  gem "factory_bot_rails"
-  gem "faker"
+  # # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
+  # gem "rubocop-rails-omakase", require: false
+  # gem "factory_bot_rails"
+  # gem "faker"
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console"
+  # gem "web-console"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
